@@ -1,3 +1,7 @@
+"""
+Usage: python example.py
+"""
+
 import time
 
 from prefect import task, flow
