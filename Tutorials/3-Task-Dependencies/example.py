@@ -6,7 +6,9 @@ import datetime
 import json
 import sqlite3
 import sys
+from prefect import flow, task
 
+@task
 def create_tables(connection):
     sql_create_projects_table = """CREATE TABLE IF NOT EXISTS projects (
                                         id integer PRIMARY KEY,
@@ -19,6 +21,7 @@ def create_tables(connection):
     cur.execute(sql_create_projects_table)
     connection.commit()
 
+@task
 def add_project(connection, name):
     sql = '''INSERT INTO projects(name,begin_date)
               VALUES(?,?) '''
@@ -27,6 +30,7 @@ def add_project(connection, name):
     connection.commit()
     return cur.lastrowid
 
+@flow(name="Add projects to DB")
 def main(project_names, db_file="/tmp/example.db"):
     connection = sqlite3.connect(db_file) 
     create_tables(connection) 
