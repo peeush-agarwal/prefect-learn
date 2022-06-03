@@ -2,6 +2,7 @@
 Usage: python example.py '["prefect"]'
 """
 
+from asyncio import wait_for
 import datetime
 import json
 import sqlite3
@@ -32,11 +33,12 @@ def add_project(connection, name):
 
 @flow(name="Add projects to DB")
 def main(project_names, db_file="/tmp/example.db"):
-    connection = sqlite3.connect(db_file) 
-    create_tables(connection) 
+    # prefect may switch threads
+    connection = sqlite3.connect(db_file, check_same_thread=False) 
+    table_task = create_tables(connection)
 
     for name in project_names:
-        add_project(connection, name)
+        add_project(connection, name, wait_for=[table_task])
 
 if __name__ == "__main__":
     main(json.loads(sys.argv[1]))
