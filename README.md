@@ -15,4 +15,7 @@ Prefect (Model orchestration tool) learning resources.
 1. [First steps](Tutorials/1-First-Steps/first_steps.ipynb)
 1. [Flow and Task Configuration](Tutorials/2-Flow-And-Task-Configuration/flow_task_config.ipynb)
 1. [Task dependencies](Tutorials/3-Task-Dependencies/example.py)
+1. [Flow execution](Tutorials/4-Flow-Execution/)
+   1. [Task runners and Parallel execution](Tutorials/4-Flow-Execution/example.py)
+   1. [Asynchronous execution](Tutorials/4-Flow-Execution/asyncio_execution.py)
 
