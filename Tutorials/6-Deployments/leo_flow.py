@@ -9,4 +9,5 @@ def log_message(name):
 def leonardo_dicaprio_flow(name:str):
     log_message(name)
 
-leonardo_dicaprio_flow("Leo")
+# Prefect will call it directly with the specified parameters when it executes the deployment
+# leonardo_dicaprio_flow("Leo")
