@@ -23,3 +23,19 @@ Prefect (Model orchestration tool) learning resources.
    1. [Dask task runner](Tutorials/5-Dask-Ray-Task-Runners/dask_flow.py)
    1. [Ray task runner](Tutorials/5-Dask-Ray-Task-Runners/ray_flow.py)
    1. [Ray subflow task runner](Tutorials/5-Dask-Ray-Task-Runners/ray_subflow.py)
+
+## Deployment tutorial
+
+1. Create a script with the flow. [leo.py](Tutorials/6-Deployments/leo_flow.py)
+1. Create a deployment specification for this flow. [leo_deployment.py](Tutorials/6-Deployments/leo_deployment.py)
+1. Set the Prefect API server URL: `prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api`
+1. Configure storage: `prefect storage create`
+   1. Make sure the bucket already exists in S3 buckets.
+1. Create the deployment: `prefect deployment create leo_deployment.py`
+1. List all of the current deployments: `prefect deployment ls`
+1. Display details of the specific deployment: `prefect deployment inspect 'leonardo_dicaprio_flow/leonardo-deployment'`
+1. Run the deployment locally: `prefect deployment execute leonardo_dicaprio_flow/leonardo-deployment`
+   1. Format of the name: flow_name/deployment_name
+   1. Flow may be referenced by multiple deployments, each deployment must have a unique name.
+1. View the deployment in Prefect UI: [Deployments](http://127.0.0.1:4200/#deployments)
+
